@@ -26,6 +26,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # added gems
 gem 'bootstrap-sass'
+gem 'devise'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
 gem 'figaro'
 gem 'font-awesome-sass'
 gem 'simple_form'
