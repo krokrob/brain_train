@@ -26,6 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # added gems
 gem 'bootstrap-sass'
+gem 'figaro'
 gem 'font-awesome-sass'
 gem 'simple_form'
 
