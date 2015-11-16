@@ -26,8 +26,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # added gems
 gem 'bootstrap-sass'
+gem 'devise'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
 gem 'figaro'
 gem 'font-awesome-sass'
+gem 'rails-i18n'
 gem 'simple_form'
 
 group :development, :test do
@@ -44,5 +48,10 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+group :production  do
+  gem 'rails_12factor'
+  gem 'puma'
 end
 
