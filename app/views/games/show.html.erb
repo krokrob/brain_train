@@ -1,0 +1,86 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">
+      Let's play! Score: <span id="score">0</span>
+      <div class="card-container">
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="card-shown">
+              <h1><%= @sequence[0] %></h1>
+            </div>
+          </div>
+          <div class="col-xs-6">
+            <div class="card-hidden">
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="flex-container hidden">
+              <div class="flex-item">
+                <i class="fa fa-check fa-5x green answer action"></i>
+              </div>
+              <div class="flex-item">
+                <i class="fa fa-times fa-5x red answer action"></i>
+              </div>
+            </div>
+            <div id="play" class='text-center action'>
+              <i class="fa fa-play fa-5x blue"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="endOfGame" class='hidden text-center padded-5em'>
+        <h1>Game is over</h1>
+          <%= link_to "See your results", "#", class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+      $(document).ready(function() {
+        var score = 0
+        var tour = 1
+        var seq = <%= @sequence %>
+        console.log(seq.length);
+        var cardNow = $('.card-shown > h1').text();
+        var cardBefore = ""
+        $('.fa-play').on('click', function() {
+          $(this).toggleClass('hidden');
+          $('.flex-container').toggleClass('hidden');
+          cardBefore = cardNow;
+          cardNow = "<%= @sequence[1] %>";
+          $('.card-shown > h1').text(cardNow);
+        });
+
+        $('.answer').on('click', function() {
+          // increment tour
+          tour += 1
+          console.log(tour);
+          // check if cardNow == cardBefore
+          if(cardNow == cardBefore && $(this).hasClass("fa-check")) {
+            score += 1
+            $('#score').text(score);
+          }
+          else if(cardNow != cardBefore && $(this).hasClass("fa-times") ){
+            score += 1
+            $('#score').text(score);
+          }
+          // change cardNow
+          cardBefore =  cardNow;
+          console.log(tour < seq.length);
+          if(tour < seq.length) {
+            cardNow = seq[tour].toString();
+            $('.card-shown > h1').text(cardNow);
+          }
+          else {
+            $('.card-container').toggleClass('hidden');
+            $('#endOfGame').toggleClass('hidden');
+          }
+        });
+      });
+  <% end %>
+<% end %>
