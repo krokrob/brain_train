@@ -38,7 +38,7 @@
       </div>
       <div id="endOfGame" class='hidden text-center padded-5em'>
         <h1>Game is over</h1>
-          <%= link_to "See your results", "#", class: "btn btn-primary" %>
+        <%= link_to "See your results", "#", class: "btn btn-primary" %>
       </div>
     </div>
   </div>
@@ -95,6 +95,9 @@
             $('.card-container').toggleClass('hidden');
             $('#endOfGame').toggleClass('hidden');
           }
+        });
+        $('#endOfGame > a').on('click', function() {
+          alert('This option will be available soon...')
         });
       });
   <% end %>
