@@ -1,22 +1,27 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">
-      Let's play! Score: <span id="score">0</span>
+      <div class="padded-2em">
+        <h3>
+          Let's play with your brain!
+          <div class="pull-right">
+            Score: <span id="score">0</span>/24
+          </div>
+        </h3>
+      </div>
       <div class="card-container">
         <div class="row">
-          <div class="col-xs-6">
-            <div class="card-shown">
+          <div class="col-xs-12 col-md-6 col-md-offset-3">
+            <div class="card card-shown" style="display: none">
               <h1><%= @sequence[0] %></h1>
             </div>
-          </div>
-          <div class="col-xs-6">
-            <div class="card-hidden">
-
+            <div class="card card-hidden" style="display: none">
+              <h1></h1>
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-6">
+          <div class="col-xs-12 col-md-6 col-md-offset-3">
             <div class="flex-container hidden">
               <div class="flex-item">
                 <i class="fa fa-check fa-5x green answer action"></i>
@@ -25,7 +30,7 @@
                 <i class="fa fa-times fa-5x red answer action"></i>
               </div>
             </div>
-            <div id="play" class='text-center action'>
+            <div id="play" class='text-center action card card-border'>
               <i class="fa fa-play fa-5x blue"></i>
             </div>
           </div>
@@ -45,21 +50,23 @@
         var score = 0
         var tour = 1
         var seq = <%= @sequence %>
-        console.log(seq.length);
+        console.log(seq);
         var cardNow = $('.card-shown > h1').text();
         var cardBefore = ""
-        $('.fa-play').on('click', function() {
+        $('#play').on('click', function() {
           $(this).toggleClass('hidden');
-          $('.flex-container').toggleClass('hidden');
-          cardBefore = cardNow;
-          cardNow = "<%= @sequence[1] %>";
-          $('.card-shown > h1').text(cardNow);
+          $('.card-shown').show().fadeOut(1000);
+          cardBefore = cardNow
+          cardNow = seq[tour].toString();
+          $('.card-hidden > h1').text(cardNow);
+          setTimeout(function() {
+            $('.card-hidden').fadeIn(1500);
+            $('.flex-container').toggleClass('hidden');
+          }, 1000);
         });
-
         $('.answer').on('click', function() {
           // increment tour
           tour += 1
-          console.log(tour);
           // check if cardNow == cardBefore
           if(cardNow == cardBefore && $(this).hasClass("fa-check")) {
             score += 1
@@ -71,10 +78,18 @@
           }
           // change cardNow
           cardBefore =  cardNow;
-          console.log(tour < seq.length);
           if(tour < seq.length) {
             cardNow = seq[tour].toString();
-            $('.card-shown > h1').text(cardNow);
+            if(tour % 2 == 0) {
+              $('.card-hidden').fadeOut(500);
+              $('.card-shown > h1').text(cardNow);
+              $('.card-shown').delay(500).fadeIn(500);
+            }
+            else {
+              $('.card-shown').fadeOut(500);
+              $('.card-hidden > h1').text(cardNow);
+              $('.card-hidden').delay(500).fadeIn(500);
+            }
           }
           else {
             $('.card-container').toggleClass('hidden');

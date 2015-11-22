@@ -5,11 +5,18 @@
  * ------------------------------------- */
 
 // Paddings
+.padded-1em {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+.padded-2em {
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
 .padded-5em {
   padding-top: 5em;
   padding-bottom: 5em;
 }
-
 // Backgrounds
 .bg-black {
   background: #4a4a4a;
@@ -23,6 +30,7 @@
 .bg-dark-blue {
   background: #3b5998;
 }
+// Colors
 .red {
   color: $red;
 }
@@ -32,6 +40,7 @@
 .blue {
   color: $blue;
 }
+// Flexboxes
 .flex-container {
   display: flex;
   align-items: center;
