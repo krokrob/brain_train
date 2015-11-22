@@ -1,8 +1,14 @@
-.card-shown {
+.card {
   width: 100%;
-  background-color: black;
-  border-radius: 10%;
+  border-radius: 5%;
   text-align: center;
-  color: white;
   padding: 8em 0;
+  &-shown, &-hidden {
+  background-color: $gray-lighter;
+  color: $blue;
+  }
+  &-border {
+    backround-color: none;
+    border: 1px solid $gray-lighter;
+  }
 }
