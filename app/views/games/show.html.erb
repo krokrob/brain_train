@@ -38,7 +38,10 @@
       </div>
       <div id="endOfGame" class='hidden text-center padded-5em'>
         <h1>Game is over</h1>
-        <%= link_to "See your results", "#", class: "btn btn-primary" %>
+        <%= simple_form_for @game do |f| %>
+          <%= f.hidden_field :score, value: 0 %>
+          <%= f.submit "See your results", class: "btn btn-primary", id: "endOfGameSubmit" %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -50,7 +53,6 @@
         var score = 0
         var tour = 1
         var seq = <%= @sequence %>
-        console.log(seq);
         var cardNow = $('.card-shown > h1').text();
         var cardBefore = ""
         $('#play').on('click', function() {
@@ -96,8 +98,11 @@
             $('#endOfGame').toggleClass('hidden');
           }
         });
-        $('#endOfGame > a').on('click', function() {
-          alert('This option will be available soon...')
+        $('#endOfGameSubmit').on('click', function(e) {
+          e.preventDefault();
+          var score = $('#score').text();
+          $('#game_score').val(score);
+          $('#endOfGame > form').submit();
         });
       });
   <% end %>
