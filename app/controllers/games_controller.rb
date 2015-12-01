@@ -1,8 +1,8 @@
 require 'scripts/sequence'
 class GamesController  < ApplicationController
   def show
-    @sequence = make_seq(1, 25)
-    @game = current_user.games.create
+    @sequence = make_seq(1, 16)
+    @game = current_user.games.create(difficulty: 0)
   end
 
   def index
