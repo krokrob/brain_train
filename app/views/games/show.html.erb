@@ -1,6 +1,11 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">
+      <h3 id="chronotime">0:00:00:00</h3>
+        <form name="chronoForm">
+            <input type="button" name="startstop" value="start!" id="start" onClick="chronoStart()" />
+
+        </form>
       <div class="padded-2em">
         <h3>
           Let's play with your brain!
@@ -40,6 +45,7 @@
         <h1>Game is over</h1>
         <%= simple_form_for @game do |f| %>
           <%= f.hidden_field :score, value: 0 %>
+          <%= f.hidden_field :chrono %>
           <%= f.submit "See your results", class: "btn btn-primary", id: "endOfGameSubmit" %>
         <% end %>
       </div>
@@ -48,7 +54,7 @@
 </div>
 
 <% content_for(:after_js) do %>
-  <%= javascript_tag do %>
+ <script>
       $(document).ready(function() {
         var score = 0
         var tour = 1
@@ -96,14 +102,21 @@
           else {
             $('.card-container').toggleClass('hidden');
             $('#endOfGame').toggleClass('hidden');
+            $('#start').click();
           }
         });
         $('#endOfGameSubmit').on('click', function(e) {
           e.preventDefault();
           var score = $('#score').text();
+          var chrono = $("#chronotime").html();
           $('#game_score').val(score);
+          $('#game_chrono').val(chrono)
           $('#endOfGame > form').submit();
         });
+
+        $("#play").on("click", function(){
+          $("#start").click();
+        })
       });
-  <% end %>
+ </script>
 <% end %>
