@@ -1,18 +1,21 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">
-      <h3 id="chronotime">00:00</h3>
-        <form name="chronoForm">
-            <input type="button" name="startstop" value="start!" id="start" onClick="chronoStart()" class="hidden" />
-
-        </form>
       <div class="padded-2em">
-        <h3>
-          Let's play with your brain!
+        <h3 class="text-center">
+          Let's play with your brain! <small>Press <kbd>A</kbd> or click <span class="green"><i class="fa fa-check"></i></span> if card is same as previous, press <kbd>P</kbd> or click <span class="red"><i class="fa fa-times"></i></span> else.</small>
+        </h3>
+        <h4>
+          <div class="pull-left">
+            Elapsed time: <span id="chronotime">00:00</span>
+          </div>
+          <form name="chronoForm">
+              <input type="button" name="startstop" value="start!" id="start" onClick="chronoStart()" class="hidden" />
+          </form>
           <div class="pull-right">
             Score: <span id="score">0</span>/<%= @sequence.length %>
           </div>
-        </h3>
+        </h4>
       </div>
       <div class="card-container">
         <div class="row">
@@ -104,6 +107,15 @@
             $('.card-container').toggleClass('hidden');
             $('#endOfGame').toggleClass('hidden');
             $('#start').click();
+          }
+        });
+        $(document).on('keyup', function(e) {
+          console.log(e.which);
+          if (e.which == 65) {
+            $(".fa-check").click();
+          }
+          else if (e.which == 80) {
+            $(".fa-times").click();
           }
         });
         $('#endOfGameSubmit').on('click', function(e) {

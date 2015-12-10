@@ -6,7 +6,7 @@ class GamesController  < ApplicationController
   end
 
   def index
-    @games = current_user.games
+    @games = current_user.games.where('score > 0')
   end
 
   def update
