@@ -3,7 +3,6 @@ class GamesController  < ApplicationController
   def show
     @sequence = make_seq(1, 16)
     @game = current_user.games.create(difficulty: 0)
-
   end
 
   def index
@@ -17,6 +16,5 @@ class GamesController  < ApplicationController
     chrono = "00:"+params[:game][:chrono]
     @game.update(score: score, chrono: chrono)
     redirect_to games_path
-
   end
 end
