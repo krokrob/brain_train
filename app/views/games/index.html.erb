@@ -12,16 +12,16 @@
       <div class="row">
         <div class="col-xs-2">Date</div>
         <div class="col-xs-2 text-center">Level</div>
-        <div class="col-xs-2 text-center">Time</div>
         <div class="col-xs-2 text-right">Score</div>
+        <div class="col-xs-2 text-right">Chrono</div>
         <div class="col-xs-2 text-right">Ranking score</div>
       </div>
       <% @games.each do |game| %>
         <div class="row">
           <div class="col-xs-2"><%= l game.created_at, format: :short %></div>
           <div class="col-xs-2 text-center"><%= game.difficulty %></div>
-          <div class="col-xs-2 text-center">available soon</div>
           <div class="col-xs-2 text-right"><%= game.score %></div>
+          <div class="col-xs-2 text-right"><%= game.chrono.strftime("%M:%S") %></div>
           <div class="col-xs-2 text-right">available soon</div>
         </div>
       <% end %>

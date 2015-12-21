@@ -13,7 +13,7 @@ class GamesController  < ApplicationController
 
     @game = Game.find(params[:id])
     score = params[:game][:score].to_i
-    chrono = params[:game][:chrono]
+    chrono = "00:"+params[:game][:chrono]
     @game.update(score: score, chrono: chrono)
     redirect_to games_path
   end
